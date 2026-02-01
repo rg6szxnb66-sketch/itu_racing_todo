@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FiniList_by_Onur_Yüksek
 
-## Getting Started
+**FiniList**, retro bir hacker terminalini andıran bir tasarıma sahip olan bir "To-Do List" sayfasıdır. Ethical Hacker kavramına duyduğum ilgiyi ve en sevdiğim renk olan yeşili bu şekilde bir araya getirmek istedim. Uygulamanın koyu ve minimalist bir teması var. Kullanıcı kayıt olup girişini yaptıktan sonra ekrana yönlendirilir. Bu ekranda listesine görev ekleme, görevi düzenleme ve silme fonksiyonlarını gerçekleştirebilir. Her görevin alt kısmında yazılma tarihi ve saati yer alır.
 
-First, run the development server:
+## Özellikler
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Liste Ekranı:** Görev ekleme, düzenleme ve silme işlemleri burada yapılır. Admin ve user için aynıdır.
+- **Admin Paneli:** Sadece `admin` rolüne sahip kullanıcıların erişimi için oluşturulmuştur. MongoDB üzerinden kendi hesabıma bu rol verilmiştir. Bunun dışında kayıt için açılan her profil `user` olarak kaydedilir ve admin paneline erişemez.
+- **Loglama Sistemi:** Sistem üzerindeki 3 işlevin (CREATE, UPDATE, DELETE) tarih ile zaman bilgileri ve kullanıcı adları ile kaydedilmesi sağlanmıştır. Bu bilgiler admin panelinde ve elbette veritabanında kendi oluşturduğum Cluster'ın içinde yer alır.
+- **Güvenlik:** Yetkisiz kullanıcıların `/admin` sayfasına erişiminin hem frontend hem de API seviyesinde engellenmesi yapılmıştır. Güvenliğin ilk hattı olan frontend engeli, admin olmayan kullanıcıların admin paneline yönlendiren butonu görememeleri şeklinde düzenlenmiştir. Fakat link aracılığıyla `/admin` sayfasına girmek isterlerse o denemelerindeki "localStorage" üzerinden kullanıcı adı kontrolü yapılır.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Fakat asıl güvenlik backend üzerinden sağlanmıştır: app/api/admin/logs/route.ts içinde yetkisiz erişim sağlamaya çalışan kişinin kullanıcı adı alınır ve MongoDB'deki admin yetkisine sahip kullanıcılardan biri mi diye kontrol edilir. Bu sayede log verileri korunmuş olur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Admin hiçbir şekilde kullanıcıların şifrelerini göremez. Çünkü kayıt işlemi sonucunda veritabanına "hash"lenerek kaydolurlar. Yani düzensiz ve anlamsız karakterler görülür sadece.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Kullanılan Teknolojiler
 
-## Learn More
+- **Frontend/Backend:** Next.js
+- **Dil:** TypeScript
+- **Database:** MongoDB
+- **Tasarım Düzenleme:** Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Geliştirici:** Onur Yüksek
+**Okul:** İstanbul Teknik Üniversitesi (İTÜ)

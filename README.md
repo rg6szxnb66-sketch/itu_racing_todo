@@ -1,6 +1,10 @@
 # FiniList_by_Onur_Yüksek
 
-**FiniList**, retro bir hacker terminalini andıran bir tasarıma sahip olan bir "To-Do List" sayfasıdır. Ethical Hacker kavramına duyduğum ilgiyi ve en sevdiğim renk olan yeşili bu şekilde bir araya getirmek istedim. Uygulamanın koyu ve minimalist bir teması var. Kullanıcı kayıt olup girişini yaptıktan sonra ekrana yönlendirilir. Bu ekranda listesine görev ekleme, görevi düzenleme ve silme fonksiyonlarını gerçekleştirebilir. Her görevin alt kısmında yazılma tarihi ve saati yer alır.
+**Live Demo:** [https://itu-racing-todo.onrender.com](https://itu-racing-todo.onrender.com)
+
+**FiniList**, retro bir hacker terminalini andıran bir tasarıma sahip olan bir "To-Do List" sayfasıdır. Ethical Hacker kavramına duyduğum ilgiyi ve en sevdiğim renk olan yeşili bu şekilde bir araya getirmek istedim. Uygulamanın adı "Finalist" ve "Finite" kelimeleri ile "List"in bir karışımından gelmektedir. Kendilerine "sonlu sayıda (finite)" ve bitirilebilir hedefler koyan ve onları tamamladıkça da kendisilerine karşı başlattıkları yarışta "finale ulaşan (finalist)" kişileri hedef almaktadır.
+
+Uygulamanın koyu ve minimalist bir teması var. Kullanıcı kayıt olup girişini yaptıktan sonra ekrana yönlendirilir. Bu ekranda listesine görev ekleme, görevi düzenleme ve silme fonksiyonlarını gerçekleştirebilir. Her görevin alt kısmında yazılma tarihi ve saati yer alır.
 
 ## Özellikler
 

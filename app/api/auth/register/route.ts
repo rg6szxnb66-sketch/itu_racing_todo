@@ -4,7 +4,7 @@ import User from "@/models/User";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
-// 🛡️ GÜVENLİK DUVARI (ZOD ŞEMASI)
+//  GÜVENLİK DUVARI (ZOD ŞEMASI)
 const registerSchema = z.object({
   username: z
     .string()
@@ -27,13 +27,13 @@ export async function POST(req: Request) {
     // 2. Gelen veriyi alma
     const body = await req.json();
 
-    // 3. 🛡️ DATA KONTROLÜ
+    // 3. DATA KONTROLÜ
     const validation = registerSchema.safeParse(body);
 
     if (!validation.success) {
       const errorFormatted = validation.error.format();
 
-      // Hatanın nerede olduğunu bul (username mi password mü?)
+      // Hatanın nerede olduğunu bulma
       const errorMessage =
         errorFormatted.username?._errors[0] ||
         errorFormatted.password?._errors[0] ||
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 5. Şifreleme (Hashing)
+    // 5. Hashleme
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 6. Kayıt İşlemi

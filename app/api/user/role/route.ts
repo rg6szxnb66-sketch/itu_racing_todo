@@ -10,6 +10,6 @@ export async function GET(req: Request) {
   if (!userId) return NextResponse.json({ role: "user" });
 
   const user = await User.findById(userId);
-  // Veritabanındaki rolü döndür (admin mi user mı?)
+  // Veritabanı kontrolü ve direkt oradaki veriyi döndürme
   return NextResponse.json({ role: user?.role || "user" });
 }

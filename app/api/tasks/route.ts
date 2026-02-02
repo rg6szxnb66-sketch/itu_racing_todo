@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Task from "@/models/Task";
-import Log from "@/models/Log"; // Log modelini ekledik
+import Log from "@/models/Log"; 
 
-// 1. GÖREVLERİ GETİR (GET)
+// 1. GÖREVLERİ GETİRME
 export async function GET(req: Request) {
   await dbConnect();
   const { searchParams } = new URL(req.url);
@@ -20,7 +20,7 @@ export async function GET(req: Request) {
   return NextResponse.json(tasks);
 }
 
-// 2. YENİ GÖREV EKLE (POST)
+// 2. YENİ GÖREV EKLEME
 export async function POST(req: Request) {
   await dbConnect();
   const { userId, content } = await req.json();
@@ -51,7 +51,7 @@ export async function DELETE(req: Request) {
     return NextResponse.json({ error: "ID Gerekli" }, { status: 400 });
   }
 
-  // Önce görevi bulalım ki log için ismini (content) alabilelim
+
   const task = await Task.findById(taskId);
   if (task) {
     await Log.create({
@@ -65,7 +65,7 @@ export async function DELETE(req: Request) {
   return NextResponse.json({ message: "Silindi" });
 }
 
-// 4. GÖREV GÜNCELLE (PATCH)
+// 4. GÖREV GÜNCELLEME
 export async function PATCH(req: Request) {
   await dbConnect();
   const { taskId, content, isCompleted } = await req.json();
@@ -81,7 +81,7 @@ export async function PATCH(req: Request) {
   );
 
   if (updatedTask) {
-    // ✅ LOG EKLE: UPDATE
+    //  LOG EKLEME VE UPDATE
     await Log.create({
       userId: updatedTask.userId,
       actionType: "UPDATE",

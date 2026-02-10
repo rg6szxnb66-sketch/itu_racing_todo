@@ -11,11 +11,13 @@ interface TaskType {
   content: string;
   isCompleted: boolean;
   createdAt: string;
+  dueDate?: string;
 }
 
 export default function Home() {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const [newTask, setNewTask] = useState("");
+  const [newDueDate, setNewDueDate] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
 
@@ -69,11 +71,12 @@ export default function Home() {
     const res = await fetch("/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, content: newTask }),
+      body: JSON.stringify({ userId, content: newTask, dueDate: newDueDate }),
     });
 
     if (res.ok) {
       setNewTask("");
+      setNewDueDate("");
       fetchTasks(userId!);
     }
   };
@@ -136,7 +139,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Görev Ekleme Formu */}
+          {/* Görev Ekleme Formu */}
         <form onSubmit={handleAddTask} className="mb-12 flex gap-4 items-end">
           <div className="flex-1">
             <Input
@@ -147,7 +150,18 @@ export default function Home() {
               onChange={(e) => setNewTask(e.target.value)}
             />
           </div>
-          <div className="mb-4 w-32">
+          <div className="w-48">
+             <label className="block text-green-500 text-sm font-mono mb-2">
+              Bitiş Tarihi
+            </label>
+            <input
+              type="datetime-local"
+              className="w-full bg-black border border-green-900 text-white p-3 rounded-lg focus:border-green-500 focus:outline-none font-mono transition-colors"
+              value={newDueDate}
+              onChange={(e) => setNewDueDate(e.target.value)}
+            />
+          </div>
+          <div className="mb-1 w-32">
             <Button text="EKLE" type="submit" />
           </div>
         </form>
@@ -216,6 +230,17 @@ export default function Home() {
                           minute: "2-digit",
                         })}{" "}
                         ]
+                         {task.dueDate && (
+                          <span className="ml-2 text-yellow-500">
+                            | Bitiş:{" "}
+                            {new Date(task.dueDate).toLocaleString("tr-TR", {
+                              day: "2-digit",
+                              month: "2-digit",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                        )}
                       </span>
                     </div>
                   )}

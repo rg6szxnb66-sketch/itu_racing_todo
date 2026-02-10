@@ -23,13 +23,13 @@ export async function GET(req: Request) {
 // 2. YENİ GÖREV EKLE (POST)
 export async function POST(req: Request) {
   await dbConnect();
-  const { userId, content } = await req.json();
+  const { userId, content, dueDate } = await req.json();
 
   if (!userId || !content) {
     return NextResponse.json({ error: "Eksik bilgi" }, { status: 400 });
   }
 
-  const newTask = await Task.create({ userId, content });
+  const newTask = await Task.create({ userId, content, dueDate });
 
   // ✅ LOG EKLE: CREATE
   await Log.create({
@@ -68,7 +68,7 @@ export async function DELETE(req: Request) {
 // 4. GÖREV GÜNCELLE (PATCH)
 export async function PATCH(req: Request) {
   await dbConnect();
-  const { taskId, content, isCompleted } = await req.json();
+  const { taskId, content, isCompleted, dueDate } = await req.json();
 
   if (!taskId) {
     return NextResponse.json({ error: "ID Gerekli" }, { status: 400 });
@@ -76,7 +76,7 @@ export async function PATCH(req: Request) {
 
   const updatedTask = await Task.findByIdAndUpdate(
     taskId,
-    { content, isCompleted },
+    { content, isCompleted, dueDate },
     { new: true },
   );
 

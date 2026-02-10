@@ -20,6 +20,11 @@ const TaskSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  dueDate: {
+    // Görev bitiş tarihi
+    type: Date,
+    required: false,
+  },
 });
 
 export default mongoose.models.Task || mongoose.model("Task", TaskSchema);
